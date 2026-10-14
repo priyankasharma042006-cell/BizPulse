@@ -1,0 +1,13 @@
+# Firebase Auth is trusted as a Third-Party Auth provider.
+# Replace with your Firebase project ID (also add it in the Supabase dashboard:
+# Authentication > Sign In / Providers > Third-Party Auth).
+[auth.third_party.firebase]
+enabled = true
+project_id = "bizpulse-v1"
+
+# The browser calls ai-chat with the project's publishable key in the `apikey` header and the
+# user's FIREBASE ID TOKEN in `Authorization`. The gateway only understands Supabase-issued JWTs,
+# so it must not check the header (verify_jwt = true made every AI request fail with 401).
+# The function verifies the Firebase token itself (see index.ts), so it is still login-protected.
+[functions.ai-chat]
+verify_jwt = false
